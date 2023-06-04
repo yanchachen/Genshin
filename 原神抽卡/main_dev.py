@@ -1,15 +1,20 @@
 import random
-
+from random import choice
 
 """卡池内容（未设置四星up角色）"""
 up = '枫原万叶'
-st5 = [up, up, up, up, up, 
-       '刻晴', '莫娜', '七七', '迪卢克', '琴', '提纳里', '迪希雅']
-cha_4 = ['安柏', '丽莎', '凯亚', '芭芭拉', '雷泽', '菲谢尔', '班尼特', 
+up_3 = ['云锦', '久岐忍', '柯莱']
+lst5 = ['刻晴', '莫娜', '七七', '迪卢克', '琴', '提纳里', '迪希雅']
+lst4 = ['安柏', '丽莎', '凯亚', '芭芭拉', '雷泽', '菲谢尔', '班尼特', 
          '诺艾尔', '菲谢尔', '砂糖', '迪奥娜', '北斗', '凝光', '香菱', 
          '行秋', '重云', '辛焱', '罗莎莉亚', '烟绯', '早柚', '托马', 
          '九条裟罗', '五郎', '云锦', '久岐忍', '柯莱', '多莉', '坎蒂丝', 
          '莱依拉','珐露珊', '瑶瑶', '米卡', '卡维', '绮良良']
+cha_4 = lst4
+st5 = [up]*len(lst5) + lst5
+for i in cha_4:
+    if i in up_3:
+        cha_4.remove(i)
 weapon_4 = ['弓藏', '祭礼弓', '绝弦', '西风猎弓', '昭心', '祭礼残章',
             '流浪乐章','西风秘典', '西风长枪','雨裁', '匣里灭辰', 
             '祭礼大剑', '钟剑', '西风大剑', '匣里龙吟', '祭礼剑', '笛剑',
@@ -25,6 +30,8 @@ class Stats:
         self.total = 0
         self.up_num = 0
         self.num_4 = 0
+        self.num4_flag = False
+        self.num5_flag = False
         self.num_5 = 0
         self.stone = 20000
 
@@ -33,7 +40,7 @@ def single():
     """不保底时的抽奖"""
     i = random.randint(1, 10001)
     if i in range(1, 61):
-        a = random.randint(0, 5)
+        a = random.randint(0, 7)
         star = st5[a]
         stat.num_5 = 0
     elif i in range(61, 316):
@@ -69,8 +76,16 @@ def check_up():
             if stat.num_4 < 9:
                 single()
             else:
-                o_4 = random.randint(0, len(st4) - 1)
-                star = st4[o_4]
+                if stat.num4_flag == True:
+                    star = choice(up_3)
+                else:
+                    i = random.randint(1, 3)
+                    if i == 1:
+                        star = choice(up_3)
+                    else:
+                        o_4 = random.randint(0, len(st4) - 1)
+                        star = st4[o_4]
+                        stat.num4_flag = True
                 add(star)
                 stat.num_4 = 0
         else:
@@ -86,13 +101,12 @@ def check_up():
 
 def record(star):
     """记录数据变化"""
-    if star != '魈':
+    if star != up:
         stat.up_num += 1
     if star not in st4:
         stat.num_4 += 1
     if star not in st5:
         stat.num_5 += 1
-
 
 def extract():
     """单抽"""
