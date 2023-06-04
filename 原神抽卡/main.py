@@ -61,7 +61,9 @@ def add(star):
     have.append(star)
     stat.total += 1
 
-
+"""
+增加功能：up四星判断
+"""
 def check_up():
     """检查保底"""
     if stat.up_num < 179:
@@ -86,7 +88,7 @@ def check_up():
 
 def record(star):
     """记录数据变化"""
-    if star != '魈':
+    if star != up:  # 原来是'魈'
         stat.up_num += 1
     if star not in st4:
         stat.num_4 += 1
