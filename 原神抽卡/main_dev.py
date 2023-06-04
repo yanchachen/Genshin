@@ -38,7 +38,6 @@ class Stats:
 
 def single():
     """不保底时的抽奖"""
-    print("不保底")
     i = random.randint(1, 10000)
     if i in range(1, 60):
         a = random.randint(0, 6)
@@ -51,7 +50,6 @@ def single():
         else:
             i = random.randint(1, 2)
             if i == 1:
-                print(i,"up角色")
                 star = choice(up_3)
                 stat.num4_flag = False
             else:
