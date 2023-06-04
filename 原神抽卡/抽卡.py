@@ -1,7 +1,6 @@
 import main_dev as main
 from time import sleep
 
-"测试用"
 print('正在加载配置文件...')
 sleep(0.5)
 print('欢迎使用《原神》模拟抽卡系统，随时输入q以退出')
