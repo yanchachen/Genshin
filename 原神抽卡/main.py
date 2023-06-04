@@ -26,7 +26,7 @@ class Stats:
         self.up_num = 0
         self.num_4 = 0
         self.num_5 = 0
-        self.stone = 20000
+        self.stone = 30000
 
 
 def single():
