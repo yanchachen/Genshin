@@ -1,4 +1,4 @@
-import main
+import main_dev as main
 from time import sleep
 
 "测试用"
@@ -7,37 +7,29 @@ sleep(0.5)
 print('欢迎使用《原神》模拟抽卡系统，随时输入q以退出')
 sleep(0.5)
 while True:
-    print('请输入对应字母以进入相应功能：\n[A]开始祈愿\t[B]祈愿记录\t[C]充值\t[q]退出')
+    print('请输入对应字母以进入相应功能：\n[A]祈愿1次\t[B]祈愿10次\t[C]祈愿记录\t[D]充值\t[q]退出')
     msg = input('')
     if msg.title() == 'A':
-        yi = input('请选择：\n[A]祈愿1次\t[B]祈愿10次\n')
-        if yi.title() == 'A':
-            sleep(1)
-            main.extract()
-            sleep(0.5)
-            continue
-        elif yi.title() == 'B':
-            sleep(1)
-            main.ten()
-            sleep(0.5)
-            continue
-        elif yi.title() == 'q':
-            break
-        else:
-            print('请输入正确的选项！')
-            sleep(1)
-            continue
+        sleep(1)
+        main.extract()
+        sleep(0.5)
+        continue
     if msg.title() == 'B':
+        sleep(1)
+        main.ten()
+        sleep(0.5)
+        continue
+    if msg.title() == 'C':
         num = len(main.have)
         print('您已进行' + str(num) + '次祈愿')
         print('其中有:')
         main.remember()
         sleep(1.5)
         continue
-    if msg.title() == 'C':
+    if msg.title() == 'D':
         print('您当前原石余额为：' + str(main.stat.stone))
-        chose = input('请选择充值金额：\n[A]6元（加赠60原石）\t[B]30元（加赠300原石）\t[C]98元（加赠980原石）'
-                      '\n[D]198元（加赠1980原石）\t[E]328元（加赠3280原石）\t[F]648元（加赠6480原石）\n[G]返回\n')
+        chose = input('请选择充值金额：\n[A]6元60原石（加赠60原石）\t[B]30元300原石（加赠300原石）\t[C]98元980原石（加赠980原石）'
+                      '\n[D]198元1980原石（加赠1980原石）\t[E]328元3280原石（加赠3280原石）\t[F]648元6480原石（加赠6480原石）\n[G]返回\n')
         if chose.title() == 'A':
             main.stat.stone += 120
         elif chose.title() == 'B':

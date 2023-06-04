@@ -38,20 +38,27 @@ class Stats:
 
 def single():
     """不保底时的抽奖"""
-    i = random.randint(1, 10001)
-    if i in range(1, 61):
-        a = random.randint(0, 7)
+    print("不保底")
+    i = random.randint(1, 10000)
+    if i in range(1, 60):
+        a = random.randint(0, 6)
         star = st5[a]
         stat.num_5 = 0
-    elif i in range(61, 316):
-        cha = random.randint(0, len(cha_4))
-        star = cha_4[cha]
+    elif i in range(60, 570):
+        if stat.num4_flag == True:
+            star = choice(up_3)
+            stat.num4_flag = False
+        else:
+            i = random.randint(1, 2)
+            if i == 1:
+                print(i,"up角色")
+                star = choice(up_3)
+                stat.num4_flag = False
+            else:
+                star = choice(st4)
+                stat.num4_flag = True
         stat.num_4 = 0
-    elif i in range(316, 571):
-        wea = random.randint(0, len(weapon_4))
-        star = weapon_4[wea]
-        stat.num_4 = 0
-    elif i in range(571, 10001):
+    elif i in range(570, 10000):
         star = '三星'
     else:
         return None
@@ -71,26 +78,31 @@ def add(star):
 
 def check_up():
     """检查保底"""
-    if stat.up_num < 179:
-        if stat.num_5 < 89:
+    if stat.up_num < 160:
+        if stat.num_5 < 80:
             if stat.num_4 < 9:
                 single()
             else:
                 if stat.num4_flag == True:
                     star = choice(up_3)
+                    stat.num4_flag = False
                 else:
-                    i = random.randint(1, 3)
+                    i = random.randint(1, 2)
                     if i == 1:
                         star = choice(up_3)
+                        stat.num4_flag = False
                     else:
-                        o_4 = random.randint(0, len(st4) - 1)
-                        star = st4[o_4]
+                        star = choice(st4)
                         stat.num4_flag = True
                 add(star)
                 stat.num_4 = 0
         else:
-            o_5 = random.randint(0, len(st5) - 1)
-            star = st5[o_5]
+            if stat.num5_flag == True:
+                star = up
+                stat.num5_flag = False
+            else:
+                star = choice(st5)
+                stat.num5_flag = False if star == up else True
             add(star)
             stat.num_5 = 0
     else:
